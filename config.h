@@ -33,6 +33,7 @@ static const Rule rules[] = {
 	{ "Gimp",        NULL,            NULL,       0,            1,           -1 },
 	{ "Firefox",     NULL,            NULL,       1 << 8,       0,           -1 },
     { "st-256color", "zsh-fastfetch", NULL,       0,            1,           -1 },
+    { "st-256color", "zsh-qalq",      NULL,       0,            1,           -1 },
 };
 
 /* layout(s) */
@@ -79,6 +80,8 @@ static const char *scrotfull[] = { "/bin/sh", "-c", "~/src/scripts/screenshot.sh
 static const char *scrotsel[]  = { "/bin/sh", "-c", "~/src/scripts/screenshot.sh select", NULL };
 static const char *scrotclip[] = { "/bin/sh", "-c", "~/src/scripts/screenshot.sh clipboard", NULL };
 
+static const char *qalq[]      = { "/bin/sh", "-c", "~/src/scripts/calculator.sh", NULL };
+
 static const Key keys[] = {
 	/* modifier                     key                       function        argument */
 	{ MODKEY,                       XK_p,                     spawn,          {.v = dmenucmd } },
@@ -124,6 +127,11 @@ static const Key keys[] = {
 	{ MODKEY|ShiftMask,             XK_s,                     spawn,          {.v = scrotfull } },
 	{ MODKEY|ShiftMask|ControlMask, XK_s,                     spawn,          {.v = scrotsel } },
 	{ MODKEY|ShiftMask|Mod1Mask,    XK_s,                     spawn,          {.v = scrotclip } },
+	{ 0,                            XK_Print,                 spawn,          {.v = scrotfull } },
+	{ ControlMask,                  XK_Print,                 spawn,          {.v = scrotsel } },
+	{ Mod1Mask,                     XK_Print,                 spawn,          {.v = scrotclip } },
+	{ ControlMask|Mod1Mask,         XK_Tab,                   focusstack,     {.i = +1 } },
+	{ 0,                            XF86XK_Calculator,        spawn,          {.v = qalq } },
 };
 
 /* button definitions */
