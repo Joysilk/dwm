@@ -61,19 +61,23 @@ static const Layout layouts[] = {
 
 /* commands */
 static char dmenumon[2] = "0"; /* component of dmenucmd, manipulated in spawn() */
-static const char *dmenucmd[] = { "dmenu_run", "-m", dmenumon, NULL };
-static const char *termcmd[]  = { "st", NULL };
+static const char *dmenucmd[]  = { "dmenu_run", "-m", dmenumon, NULL };
+static const char *termcmd[]   = { "st", NULL };
 
-static const char *upvol[]    = { "/bin/sh", "-c", "/usr/bin/wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%+ && ~/src/scripts/statusbar.sh", NULL };
-static const char *downvol[]  = { "/bin/sh", "-c", "/usr/bin/wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%- && ~/src/scripts/statusbar.sh", NULL };
-static const char *mutevol[]  = { "/bin/sh", "-c", "/usr/bin/wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle && ~/src/scripts/statusbar.sh", NULL };
+static const char *upvol[]     = { "/bin/sh", "-c", "/usr/bin/wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%+ && ~/src/scripts/statusbar.sh", NULL };
+static const char *downvol[]   = { "/bin/sh", "-c", "/usr/bin/wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%- && ~/src/scripts/statusbar.sh", NULL };
+static const char *mutevol[]   = { "/bin/sh", "-c", "/usr/bin/wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle && ~/src/scripts/statusbar.sh", NULL };
 
-static const char *mutemic[]  = { "/bin/sh", "-c", "/usr/bin/wpctl set-mute @DEFAULT_AUDIO_SOURCE@ toggle && ~/src/scripts/statusbar.sh", NULL };
+static const char *mutemic[]   = { "/bin/sh", "-c", "/usr/bin/wpctl set-mute @DEFAULT_AUDIO_SOURCE@ toggle && ~/src/scripts/statusbar.sh", NULL };
 
-static const char *uplum[]    = { "/bin/sh", "-c", "~/src/scripts/brightness.sh + && ~/src/scripts/statusbar.sh", NULL };
-static const char *downlum[]  = { "/bin/sh", "-c", "~/src/scripts/brightness.sh - && ~/src/scripts/statusbar.sh", NULL };
+static const char *uplum[]     = { "/bin/sh", "-c", "~/src/scripts/brightness.sh + && ~/src/scripts/statusbar.sh", NULL };
+static const char *downlum[]   = { "/bin/sh", "-c", "~/src/scripts/brightness.sh - && ~/src/scripts/statusbar.sh", NULL };
 
-static const char *status[]   = { "/bin/sh", "-c", "sleep 0.5 && ~/src/scripts/statusbar.sh && sleep 8 && ~/src/scripts/statusbar.sh", NULL };
+static const char *status[]    = { "/bin/sh", "-c", "sleep 0.5 && ~/src/scripts/statusbar.sh && sleep 8 && ~/src/scripts/statusbar.sh", NULL };
+
+static const char *scrotfull[] = { "/bin/sh", "-c", "~/src/scripts/screenshot.sh full", NULL };
+static const char *scrotsel[]  = { "/bin/sh", "-c", "~/src/scripts/screenshot.sh select", NULL };
+static const char *scrotclip[] = { "/bin/sh", "-c", "~/src/scripts/screenshot.sh clipboard", NULL };
 
 static const Key keys[] = {
 	/* modifier                     key                       function        argument */
@@ -117,6 +121,9 @@ static const Key keys[] = {
 	{ 0,                            XF86XK_MonBrightnessUp,   spawn,          {.v = uplum } },
 	{ 0,                            XF86XK_MonBrightnessDown, spawn,          {.v = downlum } },
 	{ 0,                            XF86XK_RFKill,            spawn,          {.v = status } },
+	{ MODKEY|ShiftMask,             XK_s,                     spawn,          {.v = scrotfull } },
+	{ MODKEY|ShiftMask|ControlMask, XK_s,                     spawn,          {.v = scrotsel } },
+	{ MODKEY|ShiftMask|Mod1Mask,    XK_s,                     spawn,          {.v = scrotclip } },
 };
 
 /* button definitions */
