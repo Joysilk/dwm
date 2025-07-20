@@ -22,7 +22,7 @@ static const char *colors[][3]      = {
 };
 
 /* tagging */
-static const char *tags[] = { "1", "2", "3", "4", "5", "6", "7", "8", "9" };
+static const char *tags[] = { "   1", "   2", "   3", "   4", "    5", "   6", "  7" };
 
 static const Rule rules[] = {
 	/* xprop(1):
@@ -30,10 +30,12 @@ static const Rule rules[] = {
 	 *	WM_NAME(STRING) = title
 	 */
 	/* class         instance         title       tags mask     isfloating   monitor */
-	{ "Gimp",        NULL,            NULL,       0,            1,           -1 },
-	{ "Firefox",     NULL,            NULL,       1 << 8,       0,           -1 },
-    { "st-256color", "zsh-fastfetch", NULL,       0,            1,           -1 },
-    { "st-256color", "zsh-qalq",      NULL,       0,            1,           -1 },
+	{ "st-256color", "zsh-fastfetch", NULL,       0,            1,           -1 },
+	{ "st-256color", "zsh-qalq",      NULL,       0,            1,           -1 },
+	{ "thunderbird", NULL,            NULL,       1 << 1,       0,           -1 },
+	{ "ncmpcpp-7",   NULL,            NULL,       1 << 6,       0,           -1 },
+	{ "mpv",         "mpv-7",         NULL,       1 << 6,       0,           -1 },
+	{ "yt-7",        NULL,            NULL,       1 << 6,       0,           -1 },
 };
 
 /* layout(s) */
@@ -81,6 +83,12 @@ static const char *scrotsel[]  = { "/bin/sh", "-c", "~/src/scripts/screenshot.sh
 static const char *scrotclip[] = { "/bin/sh", "-c", "~/src/scripts/screenshot.sh clipboard", NULL };
 
 static const char *qalq[]      = { "/bin/sh", "-c", "~/src/scripts/calculator.sh", NULL };
+
+static const char *toggaudio[] = { "/bin/sh", "-c", "mpc toggle && ~/src/scripts/statusbar.sh", NULL };
+static const char *stopaudio[] = { "/bin/sh", "-c", "mpc stop && ~/src/scripts/statusbar.sh", NULL };
+static const char *prevaudio[] = { "/bin/sh", "-c", "mpc prev && ~/src/scripts/statusbar.sh", NULL };
+static const char *nextaudio[] = { "/bin/sh", "-c", "mpc next && ~/src/scripts/statusbar.sh", NULL };
+static const char *randaudio[] = { "/bin/sh", "-c", "mpc random && ~/src/scripts/statusbar.sh", NULL };
 
 static const Key keys[] = {
 	/* modifier                     key                       function        argument */
@@ -130,8 +138,13 @@ static const Key keys[] = {
 	{ 0,                            XK_Print,                 spawn,          {.v = scrotfull } },
 	{ ControlMask,                  XK_Print,                 spawn,          {.v = scrotsel } },
 	{ Mod1Mask,                     XK_Print,                 spawn,          {.v = scrotclip } },
-	{ ControlMask|Mod1Mask,         XK_Tab,                   focusstack,     {.i = +1 } },
+	{ ControlMask|Mod1Mask,         XK_Tab,                   view,           {0} },
 	{ 0,                            XF86XK_Calculator,        spawn,          {.v = qalq } },
+	{ 0,                            XF86XK_AudioPlay,         spawn,          {.v = toggaudio } },
+	{ 0,                            XF86XK_AudioStop,         spawn,          {.v = stopaudio } },
+	{ 0,                            XF86XK_AudioPrev,         spawn,          {.v = prevaudio } },
+	{ 0,                            XF86XK_AudioNext,         spawn,          {.v = nextaudio } },
+	{ ControlMask,                  XF86XK_AudioPlay,         spawn,          {.v = randaudio } },
 };
 
 /* button definitions */
