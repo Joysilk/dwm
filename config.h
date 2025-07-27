@@ -8,6 +8,7 @@ static const unsigned int gappx     = 6;        /* gaps between windows */
 static const unsigned int snap      = 32;       /* snap pixel */
 static const int showbar            = 1;        /* 0 means no bar */
 static const int topbar             = 1;        /* 0 means bottom bar */
+static const int viewonrulestag 	= 1;		/* 1 means move to tags defined in rules */
 static const char *fonts[]          = { "Outfit:size=12",
                                         "JetBrainsMono Nerd Font:size=12" };
 static const char dmenufont[]       = "Outfit:size=16";
@@ -33,6 +34,10 @@ static const Rule rules[] = {
 	{ "st-256color", "zsh-fastfetch", NULL,       0,            1,           -1 },
 	{ "st-256color", "zsh-qalq",      NULL,       0,            1,           -1 },
 	{ "thunderbird", NULL,            NULL,       1 << 1,       0,           -1 },
+	{ "qBittorrent", NULL,            NULL,       1 << 2,       0,           -1 },
+	{ "FileZilla",   NULL,            NULL,       1 << 2,       0,           -1 },
+	{ "Gimp",        NULL,            NULL,       1 << 5,       0,           -1 },
+	{ "Inkscape",    NULL,            NULL,       1 << 5,       0,           -1 },
 	{ "ncmpcpp-7",   NULL,            NULL,       1 << 6,       0,           -1 },
 	{ "mpv",         "mpv-7",         NULL,       1 << 6,       0,           -1 },
 	{ "yt-7",        NULL,            NULL,       1 << 6,       0,           -1 },
@@ -145,6 +150,9 @@ static const Key keys[] = {
 	{ 0,                            XF86XK_AudioPrev,         spawn,          {.v = prevaudio } },
 	{ 0,                            XF86XK_AudioNext,         spawn,          {.v = nextaudio } },
 	{ ControlMask,                  XF86XK_AudioPlay,         spawn,          {.v = randaudio } },
+	{ MODKEY,                       XK_a,                     spawn,          SHCMD("firefox") },
+	{ MODKEY,                       XK_z,                     spawn,          SHCMD("thunar") },
+	{ MODKEY,                       XK_e,                     spawn,          SHCMD("thunderbird") },
 };
 
 /* button definitions */
